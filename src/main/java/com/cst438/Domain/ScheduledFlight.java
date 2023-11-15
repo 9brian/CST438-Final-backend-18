@@ -12,4 +12,6 @@ public class ScheduledFlight {
     @GeneratedValue
     private int booking_number;
 
+
+
 }
