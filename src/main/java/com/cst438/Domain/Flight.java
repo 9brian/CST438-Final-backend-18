@@ -7,22 +7,24 @@ import java.sql.Time;
 import java.util.Date;
 
 @Entity
-@Table(name="flight_table")
-@IdClass(FlightId.class) // Indicate composite primary key usage
+@Table(name="flights_table")
+//@IdClass(FlightId.class) // Indicate composite primary key usage
 public class Flight {
     @Id
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     int id;
     int flight_no;
     String carrier_name;
-    LocalDateTime departure_time;
-    LocalDateTime arrival_time;
+    Time departure_time;
+    Time arrival_time;
+    Date arrival_date;
+    Date departure_date;
     String location;
     String destination;
     double price;
 
     public Flight() {
-        super();
+//        super();
     }
 
     public int getId() {
@@ -49,19 +51,19 @@ public class Flight {
         this.carrier_name = carrier_name;
     }
 
-    public LocalDateTime getArrival_time() {
+    public Time getArrival_time() {
         return arrival_time;
     }
 
-    public void setArrival_time(LocalDateTime arrival_time) {
+    public void setArrival_time(Time arrival_time) {
         this.arrival_time = arrival_time;
     }
 
-    public LocalDateTime getDeparture_time() {
+    public Time getDeparture_time() {
         return departure_time;
     }
 
-    public void setDeparture_time(LocalDateTime departure_time) {
+    public void setDeparture_time(Time departure_time) {
         this.departure_time = departure_time;
     }
 
@@ -108,7 +110,8 @@ public class Flight {
     @Override
     public String toString() {
         return "Flight{" +
-                "flight_id=" + flight_id +
+                "id=" + id +
+                ", flight_no=" + flight_no +
                 ", carrier_name='" + carrier_name + '\'' +
                 ", departure_time=" + departure_time +
                 ", arrival_time=" + arrival_time +

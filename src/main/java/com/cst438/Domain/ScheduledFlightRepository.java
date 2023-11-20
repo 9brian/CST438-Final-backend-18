@@ -7,12 +7,11 @@ import org.springframework.data.repository.query.Param;
 public interface ScheduledFlightRepository extends CrudRepository <ScheduledFlight, Integer>{
 
     // Find ScheduledFlight entities by email
-    List<ScheduledFlight> findByUserEmail(String email);
-
-    // Find ScheduledFlight entities by flight_no
-    List<ScheduledFlight> findByFlightFlightNo(int flightNo);
+    List<ScheduledFlight> findByEmail(String email);
 
     @Query("SELECT sf FROM ScheduledFlight sf WHERE sf.booking_number = :bookingNumber")
-    ScheduledFlight findByBookingNumberCustom(@Param("bookingNumber") int bookingNumber);
+    ScheduledFlight findByBookingNumber(@Param("bookingNumber") int bookingNumber);
+
+    ScheduledFlight findByEmailAndFlightId(String email, int flightId);
 
 }

@@ -3,7 +3,6 @@ package com.cst438.Domain;
 
 import com.amadeus.resources.DatedFlight;
 import jakarta.persistence.*;
-
 import java.util.Objects;
 
 @Entity
@@ -14,9 +13,8 @@ public class ScheduledFlight {
     @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int booking_number;
 
-    @ManyToOne
-    @JoinColumn(name = "email", referencedColumnName = "email")
-    private User user;
+    @Column(name = "email")
+    private String email;
 
     @ManyToOne
     @JoinColumn(name = "flight_id", referencedColumnName = "id")
