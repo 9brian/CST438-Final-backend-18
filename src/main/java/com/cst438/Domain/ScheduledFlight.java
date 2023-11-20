@@ -7,6 +7,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 @Entity
+@Table(name="scheduled_flights_table")
 public class ScheduledFlight {
 
     @Id
@@ -18,11 +19,8 @@ public class ScheduledFlight {
     private User user;
 
     @ManyToOne
-    @JoinColumns({
-            @JoinColumn(name = "flight_no", referencedColumnName = "flight_id"),
-            @JoinColumn(name = "carrier_name", referencedColumnName = "carrier_name")
-    })
-    private FlightId flight;
+    @JoinColumn(name = "flight_id", referencedColumnName = "id")
+    private Flight flight;
 
 
     public int getBooking_number() {

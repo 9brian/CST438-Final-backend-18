@@ -14,7 +14,7 @@ CREATE TABLE flights_table (
                                location        VARCHAR(100) NOT NULL,
                                destination     VARCHAR(100) NOT NULL,
                                price           DECIMAL(10,2) NOT NULL,
-                               PRIMARY KEY (flight_id, carrier_name)
+                               PRIMARY KEY (id)
 );
 
 CREATE TABLE scheduled_flights_table (

@@ -6,8 +6,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 
-public interface FlightRepository extends CrudRepository <Flight, FlightId> {
-    Flight findById(int flight_id, String carrier_name);
+public interface FlightRepository extends CrudRepository <Flight, Integer> {
+    Flight findById(int id);
 
     List<Flight> findByLocation(String location);
 
