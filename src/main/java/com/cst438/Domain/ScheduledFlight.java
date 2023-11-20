@@ -1,17 +1,64 @@
 package com.cst438.Domain;
 
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
+import com.amadeus.resources.DatedFlight;
+import jakarta.persistence.*;
+
+import java.util.Objects;
 
 @Entity
 public class ScheduledFlight {
 
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
     private int booking_number;
 
+    @ManyToOne
+    @JoinColumn(name = "email", referencedColumnName = "email")
+    private User user;
+
+    @ManyToOne
+    @JoinColumns({
+            @JoinColumn(name = "flight_no", referencedColumnName = "flight_id"),
+            @JoinColumn(name = "carrier_name", referencedColumnName = "carrier_name")
+    })
+    private FlightId flight;
 
 
+    public int getBooking_number() {
+        return booking_number;
+    }
+
+    public void setBooking_number(int booking_number) {
+        this.booking_number = booking_number;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public FlightId getFlight() {
+        return flight;
+    }
+
+    public void setFlight(FlightId flight) {
+        this.flight = flight;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        ScheduledFlight that = (ScheduledFlight) o;
+        return booking_number == that.booking_number && Objects.equals(user, that.user) && Objects.equals(flight, that.flight);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(booking_number, user, flight);
+    }
 }
