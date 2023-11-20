@@ -26,5 +26,5 @@ CREATE TABLE scheduled_flights_table (
                                          flight_id       INT,
                                          PRIMARY KEY (booking_number),
                                          FOREIGN KEY (email) REFERENCES user_table(email) ON DELETE CASCADE,
-                                         FOREIGN KEY (flight_no, carrier_name) REFERENCES flights_table(flight_id, carrier_name) ON DELETE CASCADE
+                                         FOREIGN KEY (flight_id) REFERENCES flights_table(id) ON DELETE CASCADE
 );

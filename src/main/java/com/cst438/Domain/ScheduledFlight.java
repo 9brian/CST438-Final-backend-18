@@ -29,32 +29,13 @@ public class ScheduledFlight {
         this.booking_number = booking_number;
     }
 
-    public User getUser() {
-        return user;
+    public String getEmail() {
+        return email;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public FlightId getFlight() {
-        return flight;
-    }
 
-    public void setFlight(FlightId flight) {
-        this.flight = flight;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-        ScheduledFlight that = (ScheduledFlight) o;
-        return booking_number == that.booking_number && Objects.equals(user, that.user) && Objects.equals(flight, that.flight);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(booking_number, user, flight);
-    }
 }
