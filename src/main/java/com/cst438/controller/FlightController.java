@@ -18,6 +18,7 @@ public class FlightController {
     FlightRepository flightRepository;
 
     /* will return a list of ALL flights */
+
     @GetMapping("/flights")
     public FlightDTO[] getAllFlights() {
         //get ALL flights & create empty List
