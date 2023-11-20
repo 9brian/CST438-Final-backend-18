@@ -7,22 +7,24 @@ CREATE TABLE user_table (
 );
 
 CREATE TABLE flights_table (
-                               flight_id       INT,
+                               id              INT AUTO_INCREMENT,
+                               flight_no       INT NOT NULL,
                                carrier_name    VARCHAR(100),
-                               departure_time  DATETIME NOT NULL,
-                               arrival_time    DATETIME NOT NULL,
+                               departure_date  DATE NOT NULL,
+                               departure_time  TIME NOT NULL,
+                               arrival_date    DATE NOT NULL,
+                               arrival_time    TIME NOT NULL,
                                location        VARCHAR(100) NOT NULL,
                                destination     VARCHAR(100) NOT NULL,
                                price           DECIMAL(10,2) NOT NULL,
-                               PRIMARY KEY (flight_id, carrier_name)
+                               PRIMARY KEY (id)
 );
 
 CREATE TABLE scheduled_flights_table (
                                          booking_number  INT AUTO_INCREMENT,
                                          email           VARCHAR(45),
-                                         flight_no       INT,
-                                         carrier_name    VARCHAR(100),
+                                         flight_id       INT,
                                          PRIMARY KEY (booking_number),
                                          FOREIGN KEY (email) REFERENCES user_table(email) ON DELETE CASCADE,
-                                         FOREIGN KEY (flight_no, carrier_name) REFERENCES flights_table(flight_id, carrier_name) ON DELETE CASCADE
+                                         FOREIGN KEY (flight_id) REFERENCES flights_table(id) ON DELETE CASCADE
 );

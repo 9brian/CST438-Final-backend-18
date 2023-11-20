@@ -1,36 +1,46 @@
 package com.cst438.Domain;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
-import jakarta.persistence.Id;
-import jakarta.persistence.IdClass;
+import com.fasterxml.jackson.annotation.JsonFormat;
+import jakarta.persistence.*;
 
-import java.time.LocalDateTime;
+import java.sql.Time;
+import java.util.Date;
 
 @Entity
-@Table(name="flight_table")
-@IdClass(FlightId.class) // Indicate composite primary key usage
+@Table(name="flights_table")
+//@IdClass(FlightId.class) // Indicate composite primary key usage
 public class Flight {
     @Id
-    int flight_id;
-    @Id
+    @GeneratedValue(strategy= GenerationType.IDENTITY)
+    int id;
+    int flight_no;
     String carrier_name;
-    LocalDateTime departure_time;
-    LocalDateTime arrival_time;
+    Time departure_time;
+    Time arrival_time;
+    Date arrival_date;
+    Date departure_date;
     String location;
     String destination;
     double price;
 
     public Flight() {
-        super();
+//        super();
     }
 
-    public int getFlight_id() {
-        return flight_id;
+    public int getId() {
+        return id;
     }
 
-    public void setFlight_id(int flight_id) {
-        this.flight_id = flight_id;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public int getFlight_no() {
+        return flight_no;
+    }
+
+    public void setFlight_no(int flight_no) {
+        this.flight_no = flight_no;
     }
 
     public String getCarrier_name() {
@@ -41,19 +51,19 @@ public class Flight {
         this.carrier_name = carrier_name;
     }
 
-    public LocalDateTime getArrival_time() {
+    public Time getArrival_time() {
         return arrival_time;
     }
 
-    public void setArrival_time(LocalDateTime arrival_time) {
+    public void setArrival_time(Time arrival_time) {
         this.arrival_time = arrival_time;
     }
 
-    public LocalDateTime getDeparture_time() {
+    public Time getDeparture_time() {
         return departure_time;
     }
 
-    public void setDeparture_time(LocalDateTime departure_time) {
+    public void setDeparture_time(Time departure_time) {
         this.departure_time = departure_time;
     }
 
@@ -81,10 +91,27 @@ public class Flight {
         this.price = price;
     }
 
+    public Date getArrival_date() {
+        return arrival_date;
+    }
+
+    public void setArrival_date(Date arrival_date) {
+        this.arrival_date = arrival_date;
+    }
+
+    public Date getDeparture_date() {
+        return departure_date;
+    }
+
+    public void setDeparture_date(Date departure_date) {
+        this.departure_date = departure_date;
+    }
+
     @Override
     public String toString() {
         return "Flight{" +
-                "flight_id=" + flight_id +
+                "id=" + id +
+                ", flight_no=" + flight_no +
                 ", carrier_name='" + carrier_name + '\'' +
                 ", departure_time=" + departure_time +
                 ", arrival_time=" + arrival_time +

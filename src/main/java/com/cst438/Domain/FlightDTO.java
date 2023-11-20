@@ -1,9 +1,12 @@
 package com.cst438.Domain;
-import java.time.LocalDateTime;
+import java.sql.Time;
+import java.util.Date;
 
 
-public record FlightDTO(int flight_id, String carrier_name, LocalDateTime departure_time,
-                        LocalDateTime arrival_time, String location, String destination,
+
+public record FlightDTO(int id, int flight_no, String carrier_name, Date departure_date, Time departure_time,
+                        Date arrival_date, Time arrival_time, String location, String destination,
                         double price)  {
+
 
 }
