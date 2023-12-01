@@ -7,21 +7,20 @@ import java.net.http.HttpResponse;
 
 public class AmadeusAPIClient {
 
-    public static void main(String[] args) {
+    public static String flightOffers(String endPointString) {
         String apiKey = "65XodYiYnUCeFupAVAJgt2OAzHjxCM40";
-        String baseUrl = "https://test.api.amadeus.com"; // base URL of the API
         String secret = "GBOoGue2gPa1sJbg";
-        String token = "mrXU1ju7LyR3Z9nAaatay5hZae2V"; //GET TOKEN FROM COMMENTED CODE BELOW!!!!!!!!
+        String token = "G0aJMtyTFzvMVtuSIf1DYhKLGLK0"; //GET TOKEN FROM COMMENTED CODE BELOW!!!!!!!!
+        String baseUrl = "https://test.api.amadeus.com"; // base URL of the API
 
-        String testEndpoint = "/v2/shopping/flight-offers?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2023-12-01&adults=1&max=2";
-        String endpoint = "/v2/shopping/flight-offers"; // Specific endpoint you want to access
+        //String testEndpoint = "/v2/shopping/flight-offers?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2023-12-01&adults=1&max=2";
 
         // Create the HttpClient
         HttpClient client = HttpClient.newHttpClient();
 
         // Prepare the request
         HttpRequest request = HttpRequest.newBuilder()
-                .uri(URI.create(baseUrl + testEndpoint))
+                .uri(URI.create(baseUrl + endPointString))
                 .header("Authorization", "Bearer " + token)
                 .GET()
                 .build();
@@ -31,16 +30,18 @@ public class AmadeusAPIClient {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             int statusCode = response.statusCode();
             String responseBody = response.body();
-
             System.out.println("Status code: " + statusCode);
-            System.out.println("Response body: " + responseBody);
+            //System.out.println("Response body: " + responseBody);
+            return responseBody;
         } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
     }
 }
 
 // USE THIS TO GET TOKEN!!!!!!!!!!!!!!!!!!!!!!!!
+//package com.cst438.controller;
 //import java.net.URI;
 //import java.net.http.HttpClient;
 //import java.net.http.HttpRequest;

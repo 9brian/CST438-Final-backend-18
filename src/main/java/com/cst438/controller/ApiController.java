@@ -9,18 +9,21 @@ import com.google.gson.JsonObject;
 import com.amadeus.resources.FlightOfferSearch;
 import com.amadeus.resources.FlightPrice;
 import com.amadeus.resources.Traveler;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping(value="/api")
 public class ApiController {
-    @GetMapping("/locations")
-    public Location[] locations(@RequestParam(required=true) String keyword) throws Exception {
-        return AmadeusConnect.INSANCE.location(keyword);
+    @GetMapping("/apiflights/{ogCode}/{destCode}")
+    public String flights(@PathVariable String ogCode, @PathVariable String destCode) {
+        String endPointString = "/v2/shopping/flight-offers?originLocationCode=" + ogCode +
+                "&destinationLocationCode=" + destCode + "&departureDate=2023-12-01&adults=1&max=2";
+        String response = AmadeusAPIClient.flightOffers(endPointString);
+
+        // Display the response received from the API
+        if (response != null) {
+            return "API Response: " + response;
+        } else {
+            return "API Request failed!!!";
+        }
     }
 }
