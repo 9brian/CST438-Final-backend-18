@@ -10,7 +10,7 @@ public class AmadeusAPIClient {
     public static String flightOffers(String endPointString) {
         String apiKey = "65XodYiYnUCeFupAVAJgt2OAzHjxCM40";
         String secret = "GBOoGue2gPa1sJbg";
-        String token = "HSUGBt9nwUXc72xahm4xqFyseBtv"; //GET TOKEN FROM COMMENTED CODE BELOW!!!!!!!!
+        String token = "Rute6bWvEOG538Y6frirX7q5Oerz"; //GET TOKEN FROM COMMENTED CODE BELOW!!!!!!!!
         String baseUrl = "https://test.api.amadeus.com"; // base URL of the API
 
         //String testEndpoint = "/v2/shopping/flight-offers?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2023-12-01&adults=1&max=2";
