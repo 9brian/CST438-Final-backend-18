@@ -10,7 +10,7 @@ public class AmadeusAPIClient {
     public static String flightOffers(String endPointString) {
         String apiKey = "65XodYiYnUCeFupAVAJgt2OAzHjxCM40";
         String secret = "GBOoGue2gPa1sJbg";
-        String token = "G0aJMtyTFzvMVtuSIf1DYhKLGLK0"; //GET TOKEN FROM COMMENTED CODE BELOW!!!!!!!!
+        String token = "HSUGBt9nwUXc72xahm4xqFyseBtv"; //GET TOKEN FROM COMMENTED CODE BELOW!!!!!!!!
         String baseUrl = "https://test.api.amadeus.com"; // base URL of the API
 
         //String testEndpoint = "/v2/shopping/flight-offers?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2023-12-01&adults=1&max=2";
@@ -30,7 +30,7 @@ public class AmadeusAPIClient {
             HttpResponse<String> response = client.send(request, HttpResponse.BodyHandlers.ofString());
             int statusCode = response.statusCode();
             String responseBody = response.body();
-            System.out.println("Status code: " + statusCode);
+            //System.out.println("Status code: " + statusCode);
             //System.out.println("Response body: " + responseBody);
             return responseBody;
         } catch (Exception e) {
