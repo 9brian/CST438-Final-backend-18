@@ -1,27 +1,30 @@
 package com.cst438.Domain;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import jakarta.persistence.*;
 
-import java.sql.Time;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="flights_table")
 //@IdClass(FlightId.class) // Indicate composite primary key usage
 public class Flight {
     @Id
-    @GeneratedValue(strategy= GenerationType.IDENTITY)
     int id;
     int flight_no;
     String carrier_name;
-    Time departure_time;
-    Time arrival_time;
-    Date arrival_date;
-    Date departure_date;
-    String location;
-    String destination;
+
+    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    private List<Segment> segments;
     double price;
+
+    public List<Segment> getSegments() {
+        return segments;
+    }
+
+    public void setSegments(List<Segment> segments) {
+        this.segments = segments;
+    }
 
     public Flight() {
 //        super();
@@ -51,37 +54,7 @@ public class Flight {
         this.carrier_name = carrier_name;
     }
 
-    public Time getArrival_time() {
-        return arrival_time;
-    }
 
-    public void setArrival_time(Time arrival_time) {
-        this.arrival_time = arrival_time;
-    }
-
-    public Time getDeparture_time() {
-        return departure_time;
-    }
-
-    public void setDeparture_time(Time departure_time) {
-        this.departure_time = departure_time;
-    }
-
-    public String getLocation() {
-        return location;
-    }
-
-    public void setLocation(String location) {
-        this.location = location;
-    }
-
-    public String getDestination() {
-        return destination;
-    }
-
-    public void setDestination(String destination) {
-        this.destination = destination;
-    }
 
     public double getPrice() {
         return price;
@@ -91,21 +64,6 @@ public class Flight {
         this.price = price;
     }
 
-    public Date getArrival_date() {
-        return arrival_date;
-    }
-
-    public void setArrival_date(Date arrival_date) {
-        this.arrival_date = arrival_date;
-    }
-
-    public Date getDeparture_date() {
-        return departure_date;
-    }
-
-    public void setDeparture_date(Date departure_date) {
-        this.departure_date = departure_date;
-    }
 
     @Override
     public String toString() {
@@ -113,10 +71,6 @@ public class Flight {
                 "id=" + id +
                 ", flight_no=" + flight_no +
                 ", carrier_name='" + carrier_name + '\'' +
-                ", departure_time=" + departure_time +
-                ", arrival_time=" + arrival_time +
-                ", location='" + location + '\'' +
-                ", destination='" + destination + '\'' +
                 ", price=" + price +
                 '}';
     }
