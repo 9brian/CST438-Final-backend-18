@@ -13,18 +13,7 @@ public class Flight {
     int id;
     int flight_no;
     String carrier_name;
-
-    @OneToMany(mappedBy = "flight", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-    private List<Segment> segments;
     double price;
-
-    public List<Segment> getSegments() {
-        return segments;
-    }
-
-    public void setSegments(List<Segment> segments) {
-        this.segments = segments;
-    }
 
     public Flight() {
 //        super();

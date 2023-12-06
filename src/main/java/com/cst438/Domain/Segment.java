@@ -7,7 +7,9 @@ import jakarta.persistence.*;
 public class Segment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id; // Primary key
+    private int id;
+
+    private int flight_id;
     private int flight_number;
     private String departure_airport_code;
 
@@ -18,24 +20,20 @@ public class Segment {
     private String departure_time;
     private String arrival_time;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "flight_id")
-    private Flight flight;
-
-    public Flight getFlight() {
-        return flight;
-    }
-
-    public void setFlight(Flight flight) {
-        this.flight = flight;
-    }
-
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getFlight_id() {
+        return flight_id;
+    }
+
+    public void setFlight_id(int flight_id) {
+        this.flight_id = flight_id;
     }
 
     public int getFlight_number() {
