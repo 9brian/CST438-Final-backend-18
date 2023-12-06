@@ -1,26 +1,13 @@
 package com.cst438.controller;
 
-import com.amadeus.Amadeus;
-import com.amadeus.resources.FlightOrder;
-
-import com.amadeus.exceptions.ResponseException;
-import com.amadeus.resources.Location;
 import com.cst438.Domain.*;
-import com.google.gson.JsonObject;
-import com.amadeus.resources.FlightOfferSearch;
-import com.amadeus.resources.FlightPrice;
-import com.amadeus.resources.Traveler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import java.sql.Date;
-import java.sql.Time;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 
 @RestController
@@ -32,12 +19,13 @@ public class ApiController {
     SegmentRepository segmentRepository;
 
     @GetMapping("/apiflights/{ogCode}/{destCode}/{date}/{adults}/{max}")
-    public String flights(@PathVariable String ogCode, @PathVariable String destCode, @PathVariable String date,
-                          @PathVariable String adults, @PathVariable String max) {
+    public SegmentDTO[] flights(@PathVariable String ogCode, @PathVariable String destCode, @PathVariable String date,
+                                @PathVariable String adults, @PathVariable String max) {
         String endPointString = "/v2/shopping/flight-offers?originLocationCode=" + ogCode +
                 "&destinationLocationCode=" + destCode + "&departureDate=" + date +
                 "&adults=" + adults + "&max=" + max;
         String response = AmadeusAPIClient.flightOffers(endPointString);
+        System.out.println();
         System.out.println("Searching for flights from " + ogCode + " to " + destCode);
 
         // Display the response received from the API
@@ -76,7 +64,7 @@ public class ApiController {
                                         System.out.println("Flight Number: " + flightCode.asText());
                                         newSegment.setFlight_number(Integer.parseInt(flightCode.asText()));
 
-                                        if(!isFirstFlightNumberSet) {
+                                        if (!isFirstFlightNumberSet) {
                                             newFlight.setFlight_no(Integer.parseInt(flightCode.asText())); // maybe not needed
                                             isFirstFlightNumberSet = true;
                                         }
@@ -102,7 +90,7 @@ public class ApiController {
                                         }
                                         //GETTING ARRIVAL INFORMATION
                                         JsonNode arrival = segment.get("arrival");
-                                        if(arrival != null) {
+                                        if (arrival != null) {
                                             JsonNode arrivalAt = arrival.get("at");
                                             JsonNode arrivalCarrier = arrival.get("iataCode");
                                             String arrivalTime = arrivalAt.asText();
@@ -128,11 +116,39 @@ public class ApiController {
             } catch (Exception e) {
                 e.printStackTrace();
             }
-            return "API Response: " + response;
-        } else {
-            return "API Request failed!!!";
+//            return "API Response: " + response;
+            Iterable<Segment> segmentIterable = segmentRepository.findAll();
+            List<Segment> segmentList = new ArrayList<>();
+
+            for(Segment s : segmentIterable) {
+                segmentList.add(s);
+            }
+            System.out.println("Segment List: " + segmentList);
+            if(segmentList.isEmpty()) {
+                return new SegmentDTO[0];
+            } else {
+                SegmentDTO[] allSegments = createSegmentsDTO(segmentList);
+                return allSegments;
+            }
         }
+        return new SegmentDTO[0];
     }
+
+    public SegmentDTO[] createSegmentsDTO(List<Segment> segmentList) {
+        SegmentDTO[] result = new SegmentDTO[segmentList.size()];
+        for(int i = 0; i < segmentList.size(); i++) {
+            SegmentDTO dto = createSegment(segmentList.get(i));
+            result[i] = dto;
+        }
+        return result;
+    }
+
+    public SegmentDTO createSegment(Segment s) {
+        SegmentDTO dto = new SegmentDTO(s.getId(), s.getFlight_id(), s.getFlight_number(), s.getDeparture_airport_code(), s.getArrival_airport_code(),
+        s.getDeparture_date(), s.getArrival_date(), s.getDeparture_time(), s.getArrival_time());
+        return dto;
+    }
+
 }
 
 //TO INITIALIZE DB
