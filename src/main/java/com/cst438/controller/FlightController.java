@@ -54,7 +54,6 @@ public class FlightController {
                 flight.getId(),
                 flight.getFlight_no(),
                 flight.getCarrier_name(),
-                flight.getSegments(),
                 flight.getPrice()
         );
     }
