@@ -54,12 +54,6 @@ public class FlightController {
                 flight.getId(),
                 flight.getFlight_no(),
                 flight.getCarrier_name(),
-                flight.getDeparture_date(),
-                flight.getDeparture_time(),
-                flight.getArrival_date(),
-                flight.getArrival_time(),
-                flight.getLocation(),
-                flight.getDestination(),
                 flight.getPrice()
         );
     }
