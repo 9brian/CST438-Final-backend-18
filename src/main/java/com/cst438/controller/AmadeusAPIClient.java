@@ -8,9 +8,9 @@ import java.net.http.HttpResponse;
 public class AmadeusAPIClient {
 
     public static String flightOffers(String endPointString) {
-        String apiKey = "65XodYiYnUCeFupAVAJgt2OAzHjxCM40";
-        String secret = "GBOoGue2gPa1sJbg";
-        String token = "rLJGjx4gNg16EupNW4zzgdvrMoA7"; //GET TOKEN FROM COMMENTED CODE BELOW!!!!!!!!
+        String apiKey = "";
+        String secret = "";
+        String token = ""; //GET TOKEN FROM COMMENTED CODE BELOW!!!!!!!!
         String baseUrl = "https://test.api.amadeus.com"; // base URL of the API
 
         //String testEndpoint = "/v2/shopping/flight-offers?originLocationCode=SYD&destinationLocationCode=BKK&departureDate=2023-12-01&adults=1&max=2";
